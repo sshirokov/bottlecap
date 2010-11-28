@@ -1,8 +1,52 @@
 Bottlecap is a tiny static HTTP server.
 
-To install (using pip+virtualenvwrapper, because it's the simplest, and that's the idea here):
+Requirements:
+        bottle
+
+Required to follow this file directly:
+         virtualenvwrapper
+         pip
+
+###############
+### INSTALL ###
+###############
 
 ## Make a virtualenv to serve as a toggle for bottlecap usage
 $ mkvirtualenv bottlecap
+
 ## Install bottlecap
 $ pip install https://github.com/sshirokov/bottlecap/tarball/master
+
+##############
+#### USE #####
+##############
+
+## Activate the bottlecap virtualenv
+$ workon bottlecap
+
+## Go to where you want to serve data
+$ cd ~/src/my-project
+
+## Run bottlecap
+$ bottlecap
+
+## Go to http://localhost:6969
+$ open http://localhost:6969 # OS X example
+
+##############
+### NOTES ####
+##############
+## Like, tips and tricks?
+
+=> 'bottlecap -h' Will display command-line help
+
+=> Instead of changing to a directory you can tell bottlecap to server from
+   elsewhere with the -m PATH/--media=PATH options.
+
+
+That's pretty much it.
+The code isn't awesome because I hacked together pretty quick.
+If there's any ever interest, I'll clean it up.
+
+Have Fun!
+-Slava
