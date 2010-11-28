@@ -1,4 +1,6 @@
 Bottlecap is a tiny static HTTP server.
+I built it on Bottle <http://bottle.paws.de/docs/dev/index.html>
+
 
 Requirements:
         bottle
