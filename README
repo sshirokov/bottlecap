@@ -54,8 +54,8 @@ $ deactivate
 
 => 'bottlecap -h' Will display command-line help
 
-=> Instead of changing to a directory you can tell bottlecap to server from
-   elsewhere with the -m PATH/--media=PATH options.
+=> Instead of changing to a directory and running bottlecap you can tell
+   bottlecap where to serve from with the -m PATH/--media=PATH options.
 
 => The server will by default reload the content when it notices changes,
    and dump full stack traces back at the browser when you inevitably run
@@ -64,11 +64,14 @@ $ deactivate
 => The tutorial above is the absolute quickest point A -> B walkthrough to get you started,
    system-wide installation is still an option, thogh I usually regard it as one for crazy people.
 
+=> The index file selection code right now looks for files named roughly 'index.something', prioritizing
+   based on longest match (and as a result, preferring /index.htm.?/)  when you hit a url that resolves
+   to a directory.  I might add more later, but so might you, the whole project is under 100 lines of codes.
 
 
 That's pretty much it.
 The code isn't awesome because I hacked together pretty quick.
-If there's any ever interest, I'll clean it up.
+If there's any ever interest, I'll clean it up and evolve the "idea."
 
 Have Fun!
 -Slava
