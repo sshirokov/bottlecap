@@ -10,7 +10,7 @@ indexes = [re.compile(i)
            for i in indexes_re]
 
 def get_index_of(root):
-    score = lambda m: m and operator.sub(*m.span()[::-1])
+    m_score = lambda m: m and operator.sub(*m.span()[::-1])
     match_all = lambda f: (i.match(f) for i in indexes)
     nth = lambda n: lambda l: l[n]
     nth_to = lambda n, to: lambda obj: to(nth(n)(obj))
@@ -18,7 +18,7 @@ def get_index_of(root):
     matches = [fname
                for (fname, score) in sorted([ (filename, max(match_all(filename))) for filename in os.listdir(root)
                                               if os.path.isfile(os.path.join(root, filename)) ],
-                                            key=nth_to(1, score), reverse=True)
+                                            key=nth_to(1, m_score), reverse=True)
                if score]
     return matches and matches[0]
 
