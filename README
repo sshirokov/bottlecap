@@ -1,0 +1,8 @@
+Bottlecap is a tiny static HTTP server.
+
+To install (using pip+virtualenvwrapper, because it's the simplest, and that's the idea here):
+
+## Make a virtualenv to serve as a toggle for bottlecap usage
+$ mkvirtualenv bottlecap
+## Install bottlecap
+$ pip install https://github.com/sshirokov/bottlecap/tarball/master
