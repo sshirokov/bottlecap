@@ -35,6 +35,18 @@ $ bottlecap
 ## Go to http://localhost:6969
 $ open http://localhost:6969 # OS X example
 
+## When you're done with that directory kill bottlecap with Control-C
+$ bottlecap
+Bottle server starting [..]
+Listening on [..]
+Use Ctrl-C to quit.
+^C
+Shutting down...
+$ 
+
+## When you no longer with to have bottlecap on your path
+$ deactivate
+
 ##############
 ### NOTES ####
 ##############
@@ -44,6 +56,13 @@ $ open http://localhost:6969 # OS X example
 
 => Instead of changing to a directory you can tell bottlecap to server from
    elsewhere with the -m PATH/--media=PATH options.
+
+=> The server will by default reload the content when it notices changes,
+   and dump full stack traces back at the browser when you inevitably run
+   across an awesome bug.
+
+=> The tutorial above is the absolute quickest point A -> B walkthrough to get you started.
+
 
 
 That's pretty much it.
