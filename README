@@ -44,7 +44,7 @@ Use Ctrl-C to quit.
 Shutting down...
 $ 
 
-## When you no longer with to have bottlecap on your path
+## When you no longer wish to have bottlecap on your path, deactivate the virtualenv
 $ deactivate
 
 ##############
@@ -61,7 +61,8 @@ $ deactivate
    and dump full stack traces back at the browser when you inevitably run
    across an awesome bug.
 
-=> The tutorial above is the absolute quickest point A -> B walkthrough to get you started.
+=> The tutorial above is the absolute quickest point A -> B walkthrough to get you started,
+   system-wide installation is still an option, thogh I usually regard it as one for crazy people.
 
 
 
