@@ -1,9 +1,11 @@
-import sys, os
+import sys, os, threading, webbrowser
 from optparse import OptionParser
 import bottlecap.server as server
 
-def options_arguments_and_parser():
-    parser = OptionParser()
+def options_arguments_and_parser(usage=None, as_dict=True):
+    parser = OptionParser(
+        usage=usage and usage.format(default="Usage: %prog [options]")
+    )
     parser.add_option("-p", "--port", dest="port", default=6969,
                       type="int",
                       help="PORT to listen on [default: %default]", metavar="PORT")
@@ -24,15 +26,32 @@ def options_arguments_and_parser():
                       action="store_true",
                       help="Don't run the server, just process the arguments and report")
     (options, args) = parser.parse_args()
-    return options.__dict__, args, parser
+    return (options.__dict__ if as_dict else options,
+            args,
+            parser)
 
 
 def main():
-    options, args, parser = options_arguments_and_parser()
+    import bottlecap.routes.static
+
+    options, args, parser = options_arguments_and_parser("{default} [open_path_in_browser]")
     host, port = options.pop('addr'), options.pop('port')
     pretend = options.pop('pretend')
 
-    import bottlecap.routes.static
+    if len(args) > 1: parser.error("Too many arguments")
+    elif len(args):
+        options['open'] = args[0].lstrip('/')
+        sys.argv.pop() # Make sure the relaoder won't keep trying to open the URL
+    else: options['open'] = False
+
+    def self_url():
+        if hasattr(self_url, 'url'): return self_url.url
+        (lambda url: setattr(self_url, 'url', url))(
+            options['open'] is not(False) and
+            'http://{host}:{port}/{url}'.format(host=host, port=port, url=options['open'])
+        )
+        options.pop('open')
+        return self_url()
 
     if not pretend:
         import bottle
@@ -41,10 +60,15 @@ def main():
         bottle.debug(options.pop('debug', True))
         app.config.update(media_root=options.pop('media'))
 
+        if self_url():
+            threading.Timer(1, lambda: webbrowser.open(self_url())).start()
+
         server.run(host, port, **options)
     else:
         print "Would listen on %s:%s" % (host, port)
         print "-> Would mount / => %s" % options['media']
+        if self_url():
+            print "-> Would open browser to", self_url()
         print "Options:", options
 
 
